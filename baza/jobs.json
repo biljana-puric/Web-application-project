@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "646f834b467bd9e7c2b01ad9"
+  },
+  "JobID": 2,
+  "agency": "pedja",
+  "id": 0,
+  "period": "40",
+  "client": "paja",
+  "status": "requested",
+  "accepted": "declined",
+  "offer": "220$",
+  "employees": 0,
+  "reason": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6475d717a5197a62d4642403"
+  },
+  "JobID": 3,
+  "agency": "ana",
+  "id": 1,
+  "period": "30",
+  "client": "pera",
+  "status": "requested",
+  "accepted": "declined",
+  "__v": 0,
+  "offer": "400",
+  "employees": 0,
+  "reason": null
+},{
+  "_id": {
+    "$oid": "6476574ddcf756e0a116e923"
+  },
+  "JobID": 4,
+  "agency": "jova",
+  "id": 0,
+  "period": "40",
+  "client": "pera",
+  "status": "cancelled",
+  "accepted": "accepted",
+  "employees": 0,
+  "reason": "I don't like this tempo!",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "648f0846171d6455e22ccbfa"
+  },
+  "JobID": 5,
+  "agency": "ana",
+  "id": 2,
+  "period": "50",
+  "client": "pera",
+  "status": "finished",
+  "accepted": "accepted",
+  "__v": 0,
+  "offer": "450$",
+  "reason": null,
+  "employees": 0
+},{
+  "_id": {
+    "$oid": "648fb4002567b9f20c0df111"
+  },
+  "JobID": 6,
+  "agency": "ana",
+  "id": 0,
+  "period": "90",
+  "client": "pera",
+  "status": "requested",
+  "accepted": "sent",
+  "employees": 0,
+  "reason": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64918ad5c50b1bd9b71cea5f"
+  },
+  "JobID": 7,
+  "agency": "branko",
+  "id": 0,
+  "period": "22",
+  "client": "pera",
+  "status": "finished",
+  "accepted": "accepted",
+  "employees": 0,
+  "reason": null,
+  "__v": 0,
+  "offer": "700$"
+},{
+  "_id": {
+    "$oid": "6491a857a1be84bb187b0195"
+  },
+  "JobID": 8,
+  "agency": "branko",
+  "id": 0,
+  "period": "33",
+  "client": "pera",
+  "status": "finished",
+  "accepted": "accepted",
+  "employees": 0,
+  "reason": null,
+  "__v": 0,
+  "offer": "700$"
+}]

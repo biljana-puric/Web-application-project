@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "6484e38e0508988f08d1fc96"
+  },
+  "firstname": "Nikola",
+  "lastname": "Nikolic",
+  "specialization": "wood",
+  "phone": "0643494567",
+  "mail": "dzoni@gmail.com",
+  "agency": "ana",
+  "status": "available",
+  "job": null
+},{
+  "_id": {
+    "$oid": "6484e38e0508988f08d1fc97"
+  },
+  "firstname": "Nemanja",
+  "lastname": "Nedic",
+  "specialization": "plastic",
+  "phone": "0649203467",
+  "mail": "nemanja@gmail.com",
+  "agency": "jova",
+  "status": "available",
+  "job": null
+},{
+  "_id": {
+    "$oid": "6484e38e0508988f08d1fc98"
+  },
+  "firstname": "Nenad",
+  "lastname": "Nenadovic",
+  "specialization": "glass",
+  "phone": "0643322267",
+  "mail": "nenad@gmail.com",
+  "agency": "ana",
+  "status": "available",
+  "job": null
+},{
+  "_id": {
+    "$oid": "6484e38e0508988f08d1fc99"
+  },
+  "firstname": "Nena",
+  "lastname": "Nesic",
+  "specialization": "wood",
+  "phone": "0643320390",
+  "mail": "nena@gmail.com",
+  "agency": "ana",
+  "status": "available",
+  "job": null
+},{
+  "_id": {
+    "$oid": "64851039183168c8e8f78330"
+  },
+  "firstname": "Neda",
+  "lastname": "Nedic",
+  "mail": "neda@gmail.com",
+  "phone": "+38164/940-63-47",
+  "specialization": "concrete",
+  "agency": "ana",
+  "status": "available",
+  "job": 0,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64918a15c50b1bd9b71cea48"
+  },
+  "firstname": "Djordje",
+  "lastname": "Stanic",
+  "mail": "stanic@gmail.com",
+  "phone": "+38164/940-90-00",
+  "specialization": "alkohol",
+  "agency": "branko",
+  "status": "available",
+  "__v": 0,
+  "job": null
+},{
+  "_id": {
+    "$oid": "6491a9daa1be84bb187b01d9"
+  },
+  "firstname": "milica",
+  "lastname": "micic",
+  "mail": "mica@mail.com",
+  "phone": "+38164/940-63-48",
+  "specialization": "concrete",
+  "agency": "branko",
+  "status": "available",
+  "__v": 0,
+  "job": null
+}]

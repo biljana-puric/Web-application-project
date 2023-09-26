@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "646f1b140dd24680e5c280ca"
+  },
+  "id": 0,
+  "object_type": "Apartment",
+  "address": "Prijepolje",
+  "rooms": 1,
+  "space": 130,
+  "client": "pera",
+  "sketch": [
+    {
+      "x": 50,
+      "y": 5,
+      "width": 200,
+      "height": 300,
+      "door": [
+        {
+          "x": 50,
+          "y": 40,
+          "_id": {
+            "$oid": "648f962e905df9fe285d6d48"
+          }
+        }
+      ],
+      "status": "finished",
+      "room_number": 0,
+      "_id": {
+        "$oid": "648f986f905df9fe285d6d60"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "646f1b140dd24680e5c280cb"
+  },
+  "id": 1,
+  "object_type": "building",
+  "address": "Belgrade",
+  "rooms": "1",
+  "space": "100",
+  "client": "paja",
+  "sketch": [
+    {
+      "x": 30,
+      "y": 5,
+      "width": 200,
+      "height": 300,
+      "door": [
+        {
+          "x": 30,
+          "y": 40,
+          "width": 20,
+          "height": 30
+        }
+      ],
+      "status": "in progress",
+      "room_number": 0
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "648627a830c5e660fef197e0"
+  },
+  "id": 2,
+  "object_type": "Apartment",
+  "address": "Kneza Mihaila",
+  "rooms": 2,
+  "space": 70,
+  "client": "paja",
+  "sketch": [
+    {
+      "x": 131,
+      "y": 71,
+      "width": 100,
+      "height": 100,
+      "door": [
+        {
+          "x": 131,
+          "y": 125
+        }
+      ],
+      "status": "finished",
+      "room_number": 0,
+      "_id": {
+        "$oid": "648627a830c5e660fef197e1"
+      }
+    },
+    {
+      "x": 234,
+      "y": 71,
+      "width": 100,
+      "height": 100,
+      "door": [
+        {
+          "x": 234,
+          "y": 85
+        }
+      ],
+      "status": "finished",
+      "room_number": 1,
+      "_id": {
+        "$oid": "648627a830c5e660fef197e2"
+      }
+    }
+  ],
+  "__v": 0
+}]
