@@ -1,0 +1,90 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body><div class="wrapper"><main><header class="header"></header>
+    <br/>
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <a routerLink="/changePassword"><button class="btn btn-outline-success">Change password</button></a>&nbsp;
+        <button (click)="back()" class="btn btn-outline-success">Back</button>&nbsp;
+        <button class="btn btn-outline-success" (click)="logout()">Log out</button>
+    </nav>
+<div class="container-fluid p-3">
+<br/>
+<table *ngIf="client">
+    <tr>
+        <td><a routerLink="/profile">Profile</a></td>
+        <td><a routerLink="/objects">Objects</a></td>
+        <td><a routerLink="/agenciesMenu">Agencies</a></td>
+        <td><a routerLink="/jobs">Jobs</a></td>
+    </tr>
+    
+</table>
+<table *ngIf="!client">
+    <tr>
+        <td><a routerLink="/profile">Profile</a></td>
+        <td><a routerLink="/employees">Employees</a></td>
+        <td><a routerLink="/jobsForAgencies">Jobs</a></td>
+    </tr>
+    
+</table>
+<h2>Your data: </h2>
+<form class="container">
+    <div class="table-responsive-sm justify-content-center container">
+        <table class="table tabela ">
+            <tr class="row" *ngIf="client">
+                <td class="col">Firstname: </td>
+                <td class="col">{{user.firstname}}</td>
+            </tr>
+            <tr class="row" *ngIf="client">
+                <td class="col">Lastname: </td>
+                <td class="col">{{user.lastname}}</td>
+                
+            </tr>
+            <tr class="row" *ngIf="!client">
+                <td class="col">Agency Name:  </td>
+                <td class="col">{{user.name_of_agency}}</td>
+                
+            </tr>
+            <tr class="row" *ngIf="!client">
+                <td class="col">Country: </td>
+                <td class="col">{{user.country}}</td>
+                
+            </tr>
+            <tr class="row" *ngIf="!client">
+                <td class="col">City: </td>
+                <td class="col">{{user.city}}</td>
+                
+            </tr>
+            <tr class="row" *ngIf="!client">
+                <td class="col">Street: </td>
+                <td class="col">{{user.street}}</td>
+                
+            </tr>
+            <tr class="row" *ngIf="!client">
+                <td class="col">Description: </td>
+                <td class="col"> {{user.description}}</td>
+            </tr>
+            <tr class="row">
+                <td class="col">Mail: </td>
+                <td class="col">{{user.mail}}</td>
+                
+            </tr>
+            <tr class="row">
+                <td class="col">Phone: </td>
+                <td class="col">{{user.phone}}</td>
+                
+            </tr>
+            <tr class="row">
+                <br/>
+                <a routerLink="/updateProfile"><button class="my_button">Update profile</button></a>
+            </tr>
+        </table>
+    </div>
+</form>
+</div>
+
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>

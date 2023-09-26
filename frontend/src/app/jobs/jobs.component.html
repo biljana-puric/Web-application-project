@@ -1,0 +1,123 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body><div class="wrapper"><main><header class="header"></header>
+    <br/>
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <a routerLink="/changePassword"><button class="btn btn-outline-success">Change password</button></a>&nbsp;
+        <button (click)="back()" class="btn btn-outline-success">Back</button>&nbsp;
+        <button (click)="logout()" class="btn btn-outline-success">Log out</button>
+    </nav>
+    <br/>
+    <div class="container-fluid">
+    <table>
+        <tr>
+            <td><a routerLink="/profile">Profile</a></td>
+            <td><a routerLink="/objects">Objects</a></td>
+            <td><a routerLink="/agenciesMenu">Agencies</a></td>
+            <td><a routerLink="/jobs">Jobs</a></td>
+        </tr>
+        
+    </table>
+<div class="container-fluid">
+    <select [(ngModel)]="selectedJob">
+    <option value="active">Active Jobs</option>
+    <option value="requested">Requested Jobs</option>
+    <option value="finished">Finished Jobs</option>
+    </select> &nbsp;<button class="my_button filter_button" (click)="filter()">Filter</button>
+</div>
+
+<br/>
+<br/>
+<div class="table-responsive-sm">
+<table class="table">
+    <tr class="row">
+        <th class="col">
+            Agency: 
+        </th>
+        <th class="col">
+            Object: 
+        </th>
+        <th class="col">
+            Period of time: 
+        </th>
+        <th class="col">
+            Status: 
+        </th>
+        <th class="col">
+            Accepted: 
+        </th>
+        <th class="col" *ngIf="requestedJob">New offers from agencies</th>
+    </tr>
+
+    <!-- ovo sa klasama ne radi ne radi -->
+    <tr *ngFor = "let j of filteredJobs" [class.declined]="j.accepted=='declined'" [class.accepted]="j.accepted=='accepted'" class="row"> 
+        <td class="col">{{j.agency}}</td>
+        <td class="col">{{j.id}}</td>
+        <td class="col">{{j.period}}</td>
+        <td class="col">{{j.status}}</td>
+        <td class="col">{{j.accepted}}</td>
+        <td class="col" *ngIf="CommentEnable"><button class="my_button" (click)="leaveComment(j.agency)">Leave a comment</button></td>
+        <td class="col" *ngIf="requestedJob">{{j.offer}}</td>
+        <td class="col" *ngIf="requestedJob && j.offer"><button class="my_button" (click)="acceptOffer(j.JobID)">Accept offer</button></td>
+        <td class="col" *ngIf="requestedJob && j.offer"><button class="btn-close" (click)="declineOffer(j.JobID)"></button></td>
+        <td class="col" *ngIf="activeJob"><button class="my_button" (click)="seeImprovement(j.id, j.JobID)">See improvements</button></td>
+        <td class="col" *ngIf="activeJob"><button class="my_button" (click)="cancelJob(j.JobID)">Cancel the job</button></td>
+        <td class="col" *ngIf="enablePaying && j.JobID == job_for_paying"><button class="my_button" (click)="pay(j.JobID)">Pay</button></td>
+    </tr>
+</table>
+</div>
+<br/>
+<div class="form_wrapper">
+<form *ngIf="LeaveComment && commentExists && !activeJob && !requestedJob" class="form_helper">
+    <div class="table-responsive-sm justify-content-center p-3">
+        <table class="table">
+            <tr class="row"><input type="text" placeholder="Enter your comment" name="comment" [(ngModel)]="commentLeft.comment"></tr>
+            <tr class="row"><input type="number" placeholder="Enter your grade" name="grade" min="0" max="10" [(ngModel)]="commentLeft.grade"></tr>
+            <tr class="row"><button class="my_button" (click)="leaveComm()">Leave comment</button> &nbsp;
+                <button class="my_button" (click)="deleteComment()">Delete comment</button></tr>
+        </table>
+    </div>
+    
+</form>
+</div>
+<br/>
+<div class="container-fluid">
+<form *ngIf="cancelling && !requestedJob && !CommentEnable" class="reason_helper">
+    <div class="table-responsive-sm">
+        <table class="table">
+            <tr class="row">
+                <td class="col-sm-12 col-md-4 col-lg-4">Reason for cancelling: </td>
+                <td class="reason col-sm-12 col-md-8 col-lg-8"><textarea type="text" name="reason" [(ngModel)]="reason"></textarea></td>
+            </tr>
+            <tr class="row">
+                <td class="col" colspan="2">
+                    <button class="my_button" (click)="cancel()">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</div>
+
+<div class="form_wrapper">
+<form *ngIf="LeaveComment && !commentExists">
+    <div class="table-responsive-sm justify-content-center p-3">
+    <table class="table">
+        <tr class="row"><input type="text" placeholder="Enter your comment" name="comment" [(ngModel)]="comment"></tr>
+        <tr class="row"><input type="number" placeholder="Enter your grade" name="grade" min="0" max="10" [(ngModel)]="grade"></tr>
+        <tr class="row"><button class="my_button" (click)="leaveComm()">Leave comment</button></tr>
+    </table></div>
+</form>
+</div>
+
+<br/>
+<canvas #myCanvas width="400" height="400"></canvas>
+<!-- class="{{condition ? 'checkedClass' : 'uncheckedClass'}}" -->
+<br/>
+</div>
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,106 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body><div class="wrapper"><main><header class="header"></header>
+    <br/>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-transparent">
+            <button class="btn btn-outline-success" (click)="logoutA()">Log Out</button>&nbsp;
+            <button (click)="back()" class="back btn btn-outline-success">Back</button>&nbsp;
+            <div *ngIf="left_free_positions>0"><a routerLink='/addNewEmployee'><button  class="btn btn-outline-success">Add new employee</button></a></div>
+        </nav>
+    <br/>
+    <table>
+        <tr>
+            <td><a routerLink="/profile">Profile</a></td>
+            <td><a routerLink="/employees">Employees</a></td>
+            <td><a routerLink="/jobsForAgencies">Jobs</a></td>
+        </tr>
+        
+    </table>
+<table *ngIf="!noEmployees && !updateAllowed" class="table">
+    <tr class="row">
+        <th class="col">
+            Firstname: 
+        </th>
+        <th class="col">
+            Lastname: 
+        </th>
+        <th class="col">
+            Phone: 
+        </th>
+        <th class="col">
+            Mail: 
+        </th>
+        <th class="col">
+            Specialization: 
+        </th>
+    </tr>
+    
+    <tr *ngFor = "let e of allEmployees" class="row">
+        <td class="col">{{e.firstname}}</td>
+        <td class="col">{{e.lastname}}</td>
+        <td class="col">{{e.phone}}</td>
+        <td class="col">{{e.mail}}</td>
+        <td class="col">{{e.specialization}}</td>
+        <td class="col"><button class="btn btn-secondary btn-close" (click)="deleteEmployee(e.firstname)" 
+            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete employee">
+        </button></td>
+        <td class="col"><button class="btn btn-info" (click)="allowUpdate(e.firstname)">Update employee</button></td>
+    </tr>
+</table>
+
+<form *ngIf="updateAllowed">
+    <table class="table">
+        <tr class="row">
+            <td class="col">Firstname: </td>
+            <td class="col"><input type="text" name="firstname" [(ngModel)]="employeeForUpdate.firstname" required></td>
+        </tr>
+        <tr class="row">
+            <td class="col">Lastname: </td>
+            <td class="col"><input type="text" name="lastname" [(ngModel)]="employeeForUpdate.lastname" required></td>
+        </tr>
+        <tr class="row">
+            <td class="col">Phone number: </td>
+            <td class="col"><input type="tel" name="phone" [(ngModel)]="employeeForUpdate.phone" required></td>
+        </tr>
+        <tr class="row">
+            <td class="col">E-mail: </td>
+            <td class="col"><input type="email" name="mail" [(ngModel)]="employeeForUpdate.mail" required></td>
+        </tr>
+        <tr class="row">
+            <td class="col">Specialization: </td>
+            <td class="col"><input type="text" name="specialization" [(ngModel)]="employeeForUpdate.specialization" required></td>
+        </tr>
+        <tr class="row">
+            <td class="col">
+                 <button class="my_button" (click)="updateEmployee()">Update</button>
+            </td>
+         </tr>
+    </table>
+</form>
+
+<br/>
+
+
+
+<br/>
+<div class="container-fluid">
+    <div *ngIf="noEmployees || left_free_positions==0">
+        <table class="table">
+            <tr class="row">
+                <td class="col"> Request for positions opening</td>
+                <td class="col"><input type="number" name="number_of_positions" [(ngModel)]="number_of_positions"></td>
+                <td class="col"><button class="my_button" (click)="openPositions()">Send</button></td>
+            </tr>
+        </table>
+        
+        
+    </div>
+</div>
+</div>
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>

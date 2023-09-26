@@ -1,0 +1,126 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+<div class="wrapper"><main><header class="header"></header>
+<br/>
+
+
+<h2>Registration:</h2>
+
+<br/>
+<div class="reg container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 p-3">
+            <form>
+                <table>
+                    <tr>
+                        <td>Upload profile image</td>
+                        <td><input type="file" (change)="handleFileInput($event)" accept="image/jpeg, image/png"></td>
+                    </tr>
+                    <tr>
+                        <td>Username: </td>
+                        <td><input type="text" name="username" [(ngModel)]="username" required (input)="checkUsername()">
+                            <small *ngIf="!isUsernameAvailable">Username is not available</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" name="password" [(ngModel)]="password" required></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm password: </td>
+                        <td><input type="password" name="passwordConfirm" [(ngModel)]="confirmPassword" required validateEqual="password" (input)="confirmedPassword()">
+                            <small *ngIf="passwordDirty && !passwordCorrect">Password mismatch</small></td>
+                    </tr>
+                    <tr>
+                        <td>Phone number: </td>
+                        <td><input type="tel" name="phone" [(ngModel)]="phone" required></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail: </td>
+                        <td><input type="email" name="mail" [(ngModel)]="mail" required (input)="checkMail()">
+                            <!-- <small *ngIf="!isMailAvailable">Mail is not available</small> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                             <button (click)="myTypeIsClient()">Client</button>
+                        </td> 
+                        <td>
+                            <button (click)="myTypeIsAgency()">Agency</button>
+                        </td>
+                     </tr>
+                </table>
+            </form>        
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 p-3">
+            <form *ngIf="show && isClient" class="show_after">
+                <table>
+                    <tr *ngIf="isClient">
+                        <td>Firstname: </td>
+                        <td><input type="text" name="firstname" [(ngModel)]="firstname" required></td>
+                    </tr>
+                    <tr *ngIf="isClient">
+                        <td>Lastname: </td>
+                        <td><input type="text" name="lastname" [(ngModel)]="lastname" required></td>
+                    </tr>
+                    <tr *ngIf="isClient">
+                        <td colspan="2">
+                             <button (click)="register()">Register</button>
+                        </td> 
+                     </tr>
+                </table>
+            </form>
+            <form *ngIf="show && !isClient" class="show_after">
+                <table>
+                    <tr *ngIf="!isClient">
+                        <td>Name: </td>
+                        <td><input type="text" name="name_of_agency" [(ngModel)]="name_of_agency" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>Country: </td>
+                        <td><input type="text" name="country" [(ngModel)]="country" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>City: </td>
+                        <td><input type="text" name="city" [(ngModel)]="city" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>Street: </td>
+                        <td><input type="text" name="street" [(ngModel)]="street" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>Postal: </td>
+                        <td><input type="text" name="postal" [(ngModel)]="postal" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>Number_of_agency: </td>
+                        <td><input type="text" name="number_of_agency" [(ngModel)]="number_of_agency" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td>Agency description: </td>
+                        <td><input type="text" name="description" [(ngModel)]="description" required></td>
+                    </tr>
+                    <tr *ngIf="!isClient">
+                        <td colspan="2">
+                             <button (click)="register()">Register</button>
+                        </td> 
+                     </tr>
+                </table>
+            </form>
+        </div>
+        <!-- <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+            
+        </div> -->
+    </div>
+</div>
+<p class="error">{{message}}</p>
+
+</main>
+<footer class="footer"> Contact: @biljana.puric01@gmail.com </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>

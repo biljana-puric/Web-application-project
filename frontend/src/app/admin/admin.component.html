@@ -1,0 +1,230 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body><div class="wrapper"><main><header class="header"></header>
+    <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <button class="btn btn-outline-success"><a routerLink="/changePassword">Change password</a></button>
+        <!-- DODAVANJE NOVOG USERA -->
+        <button class="btn btn-outline-success"><a routerLink="/register">Add new user</a></button>
+        <!-- NOVI ZAHTEVI OD USERA ZA REGISTRACIJU -->
+        <button  class="btn btn-outline-success" (click)="newRequests()">See new requests</button>
+        <!-- NOVI ZAHTEVI ZA OTVARANJE RADNIH MESTA -->
+        <button class="btn btn-outline-success" (click)="newRequestsForOpeningPositions()">See new requests for opening positions</button>
+        <!-- DODAVANJE NOVOG RADNIKA -->
+        <button class="btn btn-outline-success"><a routerLink="/addNewEmployee">Add new employee</a></button>
+        <button class="btn btn-outline-success" (click)="cancellingRequests()">See requests for job cancelling</button>
+        <button class="btn btn-outline-success" (click)="logoutA()">Log Out</button>
+    </nav>
+    <div class="table-responsive-sm">
+<table *ngIf="seeNewRequestsForOpeningPositions" class="table">
+    <tr *ngFor="let a of newRequestForPositions" class="row">
+        <td class="col">{{a.username}}</td>
+        <td class="col">{{a.phone}}</td>
+        <td class="col">{{a.mail}}</td>
+        <td class="col">{{a.name_of_agency}}</td>
+        <td class="col text-truncate overflow-auto">{{a.description}}</td>
+        <td class="col">{{a.number_of_opening_positions}}</td>
+        <td class="col"><button class="my_button" (click)="allowPositions(a.username, a.number_of_opening_positions)">Allow opening positions</button></td>
+        <td class="col"><button class="btn-close"  (click)="rejectPositions(a.username)"></button></td>
+    </tr>
+</table>
+</div>
+<div class="table-responsive-sm">
+<table *ngIf="RequestedCancelling" class="table">
+    <tr *ngFor = "let j of cancellingReqs" class="row">
+        <td class="col">{{j.agency}}</td>
+        <td class="col">{{j.id}}</td>
+        <td class="col">{{j.period}}</td>
+        <td class="col">{{j.client}}</td>
+        <td class="col">{{j.offer}}</td>
+        <td class="col">{{j.status}}</td>
+        <td class="col">{{j.accepted}}</td>
+        <td class="col">{{j.reason}}</td>
+        <td class="col"><button class="my_button"  (click)="acceptCancelling(j.JobID)">Accept</button></td>
+        <td class="col"><button class="btn-close"  (click)="declineCancelling(j.JobID)"></button></td>
+    </tr>
+</table>
+</div>
+<div class="table-responsive-sm">
+<table *ngIf="seeNewRequests" class="table">
+    <tr *ngFor="let u of newRequest" class="row">
+        <td class="col"><img [src]="u.image"></td>
+        <td class="col">{{u.username}}</td>
+        <td class="col">{{u.password}}</td>
+        <td class="col" *ngIf="client">{{u.firstname}}</td>
+        <td class="col" *ngIf="client">{{u.lastname}}</td>
+        <td class="col">{{u.type}}</td>
+        <td class="col">{{u.phone}}</td>
+        <td class="col">{{u.mail}}</td>
+        <td class="col" *ngIf="!client">{{u.name_of_agency}}</td>
+        <td class="col" *ngIf="!client">{{u.country}}</td>
+        <td class="col" *ngIf="!client">{{u.city}}</td>
+        <td class="col" *ngIf="!client">{{u.street}}</td>
+        <td  class="col" *ngIf="!client">{{u.postal}}</td>
+        <td class="col" *ngIf="!client">{{u.number_of_agency}}</td>
+        <td class="col" *ngIf="!client">{{u.description}}</td>
+        <td class="col"><button class="my_button"  (click)="acceptReg(u.username)">Accept registration</button></td>
+        <td class="col"><button class="btn-close"  (click)="declineReg(u.username)"></button></td>
+    </tr>
+</table>
+</div>
+
+    <!-- SVI USERI -->
+    <h2>All Users:</h2>
+    <div class="table-responsive-sm text-justify trow">
+    <table class="table text-justify">
+        <tr class="row text-justify">
+            <th class="col text-justify">Photo</th>
+            <th class="col text-justify">username</th>
+            <th class="col text-justify">password</th>
+            <th class="col text-justify">firstname</th>
+            <th class="col text-justify">lastname</th>
+            <th class="col text-justify">type</th>
+            <th class="col text-justify">phone</th>
+            <th class="col text-justify">mail</th>
+            <th class="col text-justify">Agency name</th>
+            <th class="col text-justify">country</th>
+            <th class="col text-justify">city</th>
+            <th class="col text-justify">street</th>
+            <th class="col text-justify">postal</th>
+            <th class="col text-justify">number</th>
+            <th class="col text-justify">description</th>
+            <th class="col"></th>
+            <th class="col"></th>
+        </tr>
+        <tr *ngFor="let u of allUsers" class="row text-justify">
+            <td class="col text-justify"><img [src]="u.image" alt="Profile image"></td>
+            <td class="col text-justify">{{u.username}}</td>
+            <td class="col text-justify">{{u.password}}</td>
+            <td  class="col text-justify" >{{u.firstname}}</td>
+            <td  class="col text-justify" >{{u.lastname}}</td>
+            <td class="col text-justify">{{u.type}}</td>
+            <td class="col text-justify">{{u.phone}}</td>
+            <td class="col text-justify">{{u.mail}}</td>
+            <td  class="col text-justify" >{{u.name_of_agency}}</td>
+            <td  class="col text-justify">{{u.country}}</td>
+            <td  class="col text-justify">{{u.city}}</td>
+            <td  class="col text-justify">{{u.street}}</td>
+            <td class="col text-justify" >{{u.postal}}</td>
+            <td class="col text-justify">{{u.number_of_agency}}</td>
+            <td class="col text-justify">{{u.description}}</td>
+            <td class="col"><a routerLink="/updateProfile"><button (click)="update(u.username)" class="my_button" >Update</button></a></td>
+            <td class="col"><button class="btn-close"  (click)="deleteUser(u.username)"></button></td>
+        </tr>
+    </table>
+</div>
+    
+    <br/>
+    
+   
+    
+    
+    <!-- SVI RADNICI -->
+    <br/>
+    <h2>All employees:</h2>
+    <div class="table-responsive-sm">
+    <table *ngIf="!noEmployees" class="table">
+        <tr class="row">
+            <th class="col">
+                Firstname: 
+            </th>
+            <th class="col">
+                Lastname: 
+            </th>
+            <th class="col">
+                Phone: 
+            </th>
+            <th class="col">
+                Mail: 
+            </th>
+            <th class="col">
+                Specialization: 
+            </th>
+            <th class="col"></th>
+            <th class="col"></th>
+        </tr>
+        <tr *ngFor = "let e of allEmployees" class="row">
+            <td class="col">{{e.firstname}}</td>
+            <td class="col">{{e.lastname}}</td>
+            <td class="col">{{e.phone}}</td>
+            <td class="col">{{e.mail}}</td>
+            <td class="col">{{e.specialization}}</td>
+            <td class="col"><button class="btn-close"  (click)="deleteEmployee(e.firstname, e.agency)" aria-label="Delete"></button></td>
+            <td class="col"><button class="my_button"  (click)="allowUpdate(e.firstname)">Update</button></td>
+        </tr>
+    </table>
+</div>
+    <!-- UPDATOVANJE RADNIKA -->
+    <form *ngIf="updateAllowed">
+        <div class="table-responsive-sm">
+        <table class="table">
+            <tr class="row">
+                <td class="col">Firstname: </td>
+                <td class="col"><input type="text" name="firstname" [(ngModel)]="employeeForUpdate.firstname" required></td>
+            </tr>
+            <tr class="row">
+                <td class="col">Lastname: </td>
+                <td class="col"><input type="text" name="lastname" [(ngModel)]="employeeForUpdate.lastname" required></td>
+            </tr>
+            <tr class="row">
+                <td class="col">Phone number: </td>
+                <td class="col"><input type="tel" name="phone" [(ngModel)]="employeeForUpdate.phone" required></td>
+            </tr>
+            <tr class="row">
+                <td class="col">E-mail: </td>
+                <td class="col"><input type="email" name="mail" [(ngModel)]="employeeForUpdate.mail" required></td>
+            </tr>
+            <tr class="row">
+                <td class="col">Specialization: </td>
+                <td class="col"><input type="text" name="specialization" [(ngModel)]="employeeForUpdate.specialization" required></td>
+            </tr>
+            <tr class="row">
+                <td class="col">
+                     <button class="my_button"  (click)="updateEmployee()">Update</button>
+                     
+                </td>
+             </tr>
+        </table>
+    </div>
+    </form>
+    
+    <!-- SVI POSLOVI IZMEDJU KLIJENATA I AGENCIJA -->
+    <br/>
+    <br/>
+    <h2>All jobs:</h2>
+    <div class="table-responsive-sm">
+    <table class="table">
+        <tr class="row">
+            <th class="col">Agency:</th>
+            <th class="col">Object:</th>
+            <th class="col">Period of time:</th>
+            <th class="col">Client</th>
+            <th class="col">Offer</th>
+            <th class="col">Status</th>
+            <th class="col">Accepted</th>
+        </tr>
+        <tr *ngFor = "let j of allJobs" class="row">
+            <td class="col">{{j.agency}}</td>
+            <td class="col">{{j.id}}</td>
+            <td class="col">{{j.period}}</td>
+            <td class="col">{{j.client}}</td>
+            <td class="col">{{j.offer}}</td>
+            <td class="col">{{j.status}}</td>
+            <td class="col">{{j.accepted}}</td>
+        </tr>
+    </table>
+</div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+

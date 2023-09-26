@@ -1,0 +1,183 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body><div class="wrapper"><main><header class="header"></header>
+    <br/>
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <a routerLink="/changePassword"><button class="btn btn-outline-success">Change password</button></a>&nbsp;
+        <button (click)="back()"class="btn btn-outline-success">Back</button>&nbsp;
+        <button (click)="logout()" class="btn btn-outline-success">Log out</button>
+    </nav>
+<br/>
+<div class="container-fluid">
+<table>
+    <tr>
+        <td><a routerLink="/profile">Profile</a></td>
+        <td><a routerLink="/objects">Objects</a></td>
+        <td><a routerLink="/agenciesMenu">Agencies</a></td>
+        <td><a routerLink="/jobs">Jobs</a></td>
+    </tr>
+</table>
+
+<br/>
+<h2>All Objects:</h2>
+<div class="table-responsive-sm">
+<table class="table">
+    <tr class="row">
+        <th class="col">
+            Type: 
+        </th>
+        <th class="col">
+            Address: 
+        </th>
+        <th class="col">
+            Rooms: 
+        </th>
+        <th class="col">
+            Space: 
+        </th>
+        <th class="col">
+            Sketch: 
+        </th>
+        <th class="col"></th>
+        <th class="col"></th>
+    </tr>
+    <tr  class="row" *ngFor = "let o of allObjects">
+        <td class="col">{{o.object_type}}</td>
+        <td class="col">{{o.address}}</td>
+        <td class="col">{{o.rooms}}</td>
+        <td class="col">{{o.space}}</td>
+        <td class="col"><button class="my_button"  (click)="sketch(o.id)">See sketch</button></td>
+        <td class="col"><button class="my_button" (click)="updateObject(o.id)">Update object</button></td>
+        <td class="col"><button class="btn-close" (click)="deleteObject(o.id)"></button></td>
+    </tr>
+</table>
+</div>
+<br/>
+
+<form *ngIf="updateAllow" class="skica">
+    <div class="table-responsive-sm">
+    <table>
+        <tr class="row">
+            <td class="col-sm-12 col-md-6 col-lg-6">Address:</td>
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="text" name="address" [(ngModel)]="updatingObject.address"></td>
+        </tr>
+        <tr class="row">
+            <td class="col-sm-12 col-md-6 col-lg-6">Number of rooms:</td>
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="number" name="rooms" [(ngModel)]="updatingObject.rooms" max="3" min="1"></td>
+        </tr>
+        <tr class="row">
+            <td class="col-sm-12 col-md-6 col-lg-6">Space:</td>
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="number" name="space" [(ngModel)]="updatingObject.space"></td>
+        </tr>
+        <tr class="row">
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="radio" name="type" [(ngModel)]="updatingObject.object_type" value="Apartment"> Apartment</td>
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="radio" name="type" [(ngModel)]="updatingObject.object_type" value="House"> House</td>
+        </tr>
+        <tr class="row">
+            <td class="col-sm-12 col-md-6 col-lg-6">Space:</td>
+            <td class="col-sm-12 col-md-6 col-lg-6"><input type="number" name="space" [(ngModel)]="updatingObject.space"></td>
+        </tr>
+        <tr class="row" *ngFor="let r of updateRooms">
+            <td class="col-sm-12 col-md-3 col-lg-3 justify-content-center">Room: </td>
+            <td class="col-sm-12 col-md-3 col-lg-3">
+                <table class="table">
+                    <tr class="row">
+                        <td>X coordinate: &nbsp;<input type="number" name="x" [(ngModel)]="r.x"></td>
+                        <td>Y coordinate: &nbsp;<input type="number" name="y" [(ngModel)]="r.y"></td>
+                    </tr>
+                </table> 
+            </td>
+            <td class="col-sm-12 col-md-3 col-lg-3">
+                <table class="table">
+                    <tr class="row">
+                        <td>Width: &nbsp;<input type="number" name="width" [(ngModel)]="r.width"></td>
+                        <td>Height: &nbsp;<input type="number" name="height" [(ngModel)]="r.height"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="col-sm-12 col-md-3 col-lg-3"> Doors:
+                <table class="table">
+                    <tr *ngFor="let d of r.door" class="row">
+                        <td class="col">
+                            X: &nbsp;<input type="number" name="dx" [(ngModel)]="d.x">
+                        </td>
+                        <td class="col">
+                            Y: &nbsp;<input type="number" name="dy" [(ngModel)]="d.y">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="row">
+            <button class="my_button"  (click)="updateThis()">Update</button>
+        </tr>
+    </table>
+</div>
+</form>
+
+
+<h2>Add Objects :</h2>
+<div class="center_buttons"><button class="my_button"  (click)="drawEnable()">Draw</button>&nbsp;
+<button class="my_button"  (click)="importFileEnable()">Import file</button></div>
+
+<br/>
+<div class="container-fluid">
+<div *ngIf="importfileEnabled && !drawingEnabled">
+    <input type="file" (change)="onFileSelected($event)"><br/>
+    <button class="my_button"  (click)="uploadObject()">Upload Object</button>
+</div>
+<br/>
+<!-- <div *ngIf="!importfileEnabled && drawingEnabled"> -->
+    <form>
+        <table>
+            <tr>
+                <td><input type="radio" name="type" [(ngModel)]="object_type" value="Apartment"> Apartment</td>
+                <td><input type="radio" name="type" [(ngModel)]="object_type" value="House"> House</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" name="address" [(ngModel)]="address"></td>
+            </tr>
+            <tr>
+                <td>Number of rooms:</td>
+                <input type="number" name="rooms" [(ngModel)]="rooms" max="3" min="1">
+            </tr>
+            <tr>
+                <td>Space:</td>
+                <input type="number" name="space" [(ngModel)]="space">
+            </tr>
+        </table>
+    </form>
+</div>
+    <br/>
+    <br/>
+    <div class="container-fluid wh_helper">
+        Height: &nbsp;
+        <input type="number" id="roomHeight" [(ngModel)]="roomHeight"> &nbsp;
+        Width: &nbsp;
+        <input type="number" id="roomWidth" [(ngModel)]="roomWidth"> &nbsp;
+        <button class="my_button"  (click)="addDoor()">Add door</button>
+    </div>
+    
+    <br/>
+    <div class="container-fluid">
+    <canvas #myCanvas width="400" height="400" (mousedown)="onCanvasMouseDown($event)" (mousemove)="onCanvasMouseMove($event)"
+            (mouseup)="onCanvasMouseUp($event)"></canvas>
+    </div>
+    
+    <br/>
+    <!-- <button (click)="addRoom()">Add room</button> -->
+    <button class="my_button"  (click)="addObject()">Add object</button>
+<!-- </div> -->
+
+
+<br/>
+<br/>
+</div>
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>

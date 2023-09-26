@@ -1,0 +1,121 @@
+.error{
+    color: red;
+}
+
+form{
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  /* width: 50%; */
+}
+
+a {
+  text-decoration: none;
+  }
+
+h2{
+    text-align: center;
+}
+
+/* p{
+    justify-content: center;
+    display: flex;
+    font-size: large;
+    width: max-content;
+    margin: auto;
+} */
+
+table{
+    width: 100%;
+  margin-bottom: 10px;
+  border-collapse: collapse;
+} 
+
+.my_button{
+    width: 200px;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+body{
+  background-image: url('../../assets/background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+input{
+    width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button:hover {
+    background-color: #555;
+  }
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.changePass{
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .footer {
+    margin-top: auto;
+  }
+
+  .container {
+    display: flex;
+  }

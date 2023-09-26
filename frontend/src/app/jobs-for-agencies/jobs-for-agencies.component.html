@@ -1,0 +1,128 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body><div class="wrapper"><main><header class="header"></header>
+    <br/>
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <button (click)="logoutA()" class="btn btn-outline-success">Log Out</button>&nbsp;
+        <button (click)="back()" class="btn btn-outline-success">Back</button>
+    </nav>
+    <div class="container-fluid">
+        <table>
+            <tr>
+                <td><a routerLink="/profile">Profile</a></td>
+                <td><a routerLink="/employees">Employees</a></td>
+                <td><a routerLink="/jobsForAgencies">Jobs</a></td>
+            </tr>
+            
+        </table>
+<br/>
+<div *ngIf="ModifiedRequests.length>0">
+<h2>Requests from clients:</h2>
+<div class="table-responsive-sm">
+    <table>
+        <tr>
+            <th>Client:</th>
+            <th>About Client:</th>
+            <th>Object ID:</th>
+            <th>About Object</th>
+            <th>Period of time:</th>
+        </tr>
+        <tr *ngFor = "let r of ModifiedRequests">
+            <td>{{r.client}}</td>
+            <td *ngFor="let c of allClients"> 
+                <small *ngIf="c.username == r.client">{{c.firstname}}</small><br/>
+                <small *ngIf="c.username == r.client">{{c.lastname}}</small><br/>
+                <small *ngIf="c.username == r.client">{{c.mail}}</small><br/>
+                <small *ngIf="c.username == r.client">{{c.phone}}</small>
+            </td>
+            <td>{{r.id}}</td>
+            <td *ngFor="let o of allObjects">
+                <small *ngIf="o.id == r.id">{{o.object_type}}</small><br/>
+                <small *ngIf="o.id == r.id">{{o.address}}</small><br/>
+                <small *ngIf="o.id == r.id">{{o.rooms}}</small><br/>
+                <small *ngIf="o.id == r.id">{{o.space}}</small>
+            </td>
+            <td>{{r.period}}</td>
+            <td><button class=" btn btn-outline-light" (click)="accept(r.JobID)">Accept</button></td>
+            <td *ngIf="!accepted"><input type="text" name="offer" [(ngModel)]="offer" placeholder="Enter your offer"></td>
+            <td *ngIf="!accepted && !offerSent"><button class=" btn btn-outline-light" (click)="sendOffer()">Send offer</button></td>
+            <td><button  class=" btn btn-outline-light" (click)="decline(r.JobID)">Decline</button></td>
+            <td><button  class=" btn btn-outline-light" (click)="seeSketch(r.id)">See sketch</button></td>
+        </tr>
+    </table>
+</div>
+
+</div>
+
+<h2>Active jobs:</h2>
+<div class="table-responsive-sm">
+    <table>
+        <tr>
+            <th>
+                Client: 
+            </th>
+            <th>
+                Object ID: 
+            </th>
+            <th>
+                Period of time: 
+            </th>
+        </tr>
+        <tr *ngFor = "let aj of ActiveJobs">
+            <td>{{aj.client}}</td>
+            <td>{{aj.id}}</td>
+            <td>{{aj.period}}</td>
+            <td><button class="btn btn-outline-light" (click)="seeSketch(aj.id)">See sketch</button></td>
+            <td><button class="btn btn-outline-light" (click)="hireEmployees(aj.JobID, aj.id)">Hire employees</button></td>
+        </tr>
+    </table>
+</div>
+<br/>
+<div class="table-responsive-sm">
+    <table *ngIf="hireAvailableEmployees">
+        <tr>
+            <th>Hire</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Specialization</th>
+            <th>Phone</th>
+            <th>Mail</th>
+        </tr>
+        <tr *ngFor = "let aE of availableEmployees">
+            <td><input type="radio" (change)="markedForHiring(aE.firstname)"></td>
+            <td>{{aE.firstname}}</td>
+            <td>{{aE.lastname}}</td>
+            <td>{{aE.specialization}}</td>
+            <td>{{aE.phone}}</td>
+            <td>{{aE.mail}}</td>
+        </tr>
+        <tr><button class="btn btn-outline-light" (click)="hire()">Hire</button></tr>
+    </table>
+</div>
+
+<div class="error">{{message}}</div>
+
+<canvas #myCanvas width="400" height="400"></canvas>
+<br/>
+<div class="table-responsive-sm container_finish" *ngIf="finish_available">
+    <table>
+        <tr>
+            <td>
+                <select [(ngModel)]="finishRoom">
+                    <option *ngFor="let r of allRooms" [value]="r.room_number">{{r.room_number}}</option>
+                </select>
+            </td>
+            <td>
+                <button class="my_button finish_button" (click)="finish()">Finish Room</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+    </div>
+</main><footer class="footer"> Contact: @biljana.puric01@gmail.com </footer></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
